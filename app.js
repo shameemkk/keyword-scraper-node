@@ -21,7 +21,12 @@ async function analyzeKeywords(url, timeout = 30, maxRetries = 3) {
   for (let attempt = 0; attempt < maxRetries; attempt++) {
     let browser;
     try {
-      browser = await chromium.launch({ headless: true });
+     
+       browser = await chromium.launch({
+        headless: true,
+  args: ['--no-sandbox', '--disable-setuid-sandbox']
+});
+
       const context = await browser.newContext({
         userAgent:
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
